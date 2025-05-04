@@ -1,0 +1,8 @@
+{
+    "image": "debian:bookworm-slim",
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils": {},
+        "ghcr.io/prulloac/devcontainer-features/latex": {"packages":"beamer"}
+    },
+    "containerUser": "vscode"
+}
