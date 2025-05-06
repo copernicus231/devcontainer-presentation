@@ -48,8 +48,10 @@
 % Title, author, date
 \title{Pero si mi codigo corre en mi compu!}
 \subtitle{Desarollo en Contenedores}
-\author{Teresa Bracahamonte \& Nicolas Vega}
+\author{Teresa Bracamonte \& Nicolas Vega}
 \date{\today}
+
+\setcounter{tocdepth}{1}
 
 \begin{document}
 
@@ -60,9 +62,18 @@
 
 \begin{frame}{Acerca de}
   \begin{itemize}
-    \item \textbf{Doctora Teresa Bracahamonte:} Experta "Data Scientist" ))
+    \item \textbf{Teresa Bracahamonte:} Doctora en Computación de la Universidad de Chile, Technical lead en Equifax
     \item \textbf{Nicolas Vega:} Ingeniero en Informática egresado universidad de Santiago, programador con mas de 15 años de experiencia en desarrollo de software.
   \end{itemize}
+\end{frame}
+
+% Table of contents
+\begin{frame}{Antes de empezar}
+  \begin{itemize}
+    \item \textbf{Objetivo:} Mostrar como usar dev containers para el desarrollo de software.
+    \item \textbf{Alcance:} Desarollo en contenedores, configuracion de contenedores y ejemplos de configuracion.
+    \item \textbf{No cubriremos:} Docker, Kubernetes, CI/CD, DevOps.
+  \end{itemize} 
 \end{frame}
 
 % Table of contents
@@ -71,25 +82,25 @@
 \end{frame}
 
 % Section 1
-\section{Introduccion}
-\subsection{Que son los entornos de desarrollo en contenedores?}
+\section{Introducción}
+\subsection{¿Qué son los entornos de desarrollo en contenedores?}
 \begin{frame}{\subsecname}
   Los dev containers permiten tener un ambiente aislado con una serie de configuraciones 
   y features que ayudan a los desarolladores a correr sus aplicaciones mejorando la 
-  integracion continua y testing.
+  integración continua y testing de forma local o remota.
+
   \begin{block}{En estos contenedores encontramos}
     \begin{itemize}
       \item Sistema operativo reducido (\textbf{imagen})
       \item Paquetes de ejecución y productividad (\textbf{features})
       \item Sistema de archivos locales del contenedor
       \item Nuestro código (\textbf{volumen} host:contenedor)
-      \item Backend de nuestro IDE 
-      \item Pueden correr en entornos locales o remotos
+      \item Backend de nuestro IDE
     \end{itemize}
   \end{block}
 \end{frame}
 
-\begin{frame}{Detras de la caja negra}
+\begin{frame}{Detrás de la caja negra}
   \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/architecture-containers.png}
@@ -97,30 +108,31 @@
   \end{figure}
 \end{frame}
 
-\subsection{Beneficios y Desafios}
+\subsection{Beneficios y Desafíos}
 \begin{frame}{Beneficios del desarrollo en contenedores}
   \begin{itemize}
-    \item \textbf{Aislamiento:} Cada proyecto puede tener su propio contenedor, lo cual previene conflictos entre diferentes versiones de dependencias en proyectos diferentes.
+    \item \textbf{Aislamiento:} Cada proyecto puede tener su propio contenedor, lo que previene conflictos entre proyectos con dependencias en diferentes versiones.
     \item \textbf{Portabilidad:} Funciona en cualquier máquina con Docker.
     \item \textbf{Consistencia:} Contenedores logran encapsular el entorno de desarrollo (librerías, dependencias, etc). Los desarrolladores logran un entorno de desarrollo consistente en todas sus máquinas locales.
     \item \textbf{Facilidad de uso:} Configuración rápida y sencilla.
   \end{itemize}
 \end{frame}
 
-\begin{frame}{Desafios asociados al desarollo en contenedores}
+\begin{frame}{Desafíos asociados al desarollo en contenedores}
   \begin{itemize}
-    \item \textbf{Curva de aprendizaje:} Requiere un conocimiento básico, comandos y herramientas relacionadas a contenedores. Esto podría volver lenta la adopción y aumentar la curva de aprendizaje de los desarrolladores.
+    \item \textbf{Curva de aprendizaje:} Requiere un conocimiento básico, comandos y herramientas relacionadas a contenedores. Esto puede dificultar la adopción y aumentar la curva de aprendizaje de los desarrolladores.
     \item \textbf{Rendimiento:} El correr los contenedores en local requiere mayor utilización de memoria y CPU, sumado a que se pueden correr múltiples entornos de desarrollo a la vez.
     \item \textbf{Depuración:} Herramientas de depuración pueden ser limitadas.
     \item \textbf{Seguridad:} Los contenedores podrían tener vulnerabilidades o librerías desactualizadas.
   \end{itemize}
 \end{frame}
+
 \subsection{Ciclo de desarrollo ideal}
 \begin{frame}{\subsecname}
   \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{images/dev-container-stages.png}
-    \caption{Dev,CI y Prod}
+    \caption{Desarrollo en Dev, Testeo en CI y Despliegue en Prod}
   \end{figure}
 \end{frame}
 
@@ -144,44 +156,33 @@
 
 \subsection{Python uv fastapi en entorno local}
 \begin{frame}{\subsecname}
-  \begin{columns}
-    \begin{column}{0.7\textwidth}
-      \begin{itemize}
-        \small
+  \begin{itemize}
         \item Obtener el proyecto desde github
         \item \href{https://github.com/copernicus231/devcontainer-boilerplate-python-uv-fastapi.git}{https://github.com/copernicus231/devcontainer-boilerplate-python-uv-fastapi.git}
-        \item Ir a la paleta de comandos y buscar "Dev Containers: Reopen in Container"
-        \item Seleccionar "Reopen in Container"
-        \normalsize    \end{itemize}
-      El contenedor se creara usando el archivo en \textbf{.devcontainer/devcontainer.json}
-    \end{column}
-    \begin{column}{0.3\textwidth}
-      \begin{figure}
-        \centering
-        \includegraphics[width=\textwidth]{images/open-container.png}
-        \caption{Configuración de FastAPI en contenedor.}
-      \end{figure}
-    \end{column}
-  \end{columns}
+        \item Ir a la paleta de comandos y buscar  “Dev Containers: Reopen in Container”
+        \item Seleccionar “Reopen in Container”
+  \end{itemize}
+  La definición del contenedor está en: \textbf{.devcontainer/devcontainer.json}
 \end{frame}
 
+\begin{frame}{Running in local}
+  \begin{figure}
+    \centering
+    \includegraphics[width=\textwidth]{images/open-container.png}
+    \caption{Configuración de FastAPI en contenedor.}
+  \end{figure}
+\end{frame}
 
 \begin{frame}{\subsecname}
-  \begin{columns}
-    \begin{column}{0.5\textwidth}
-      \begin{itemize}
-        \item \texttt{cd simple-service}
-        \item \texttt{uv run fastapi dev src/simple\_service/base.py}
-      \end{itemize}
-        \end{column}
-        \begin{column}{0.5\textwidth}
-      \begin{figure}
-        \centering
-        \includegraphics[width=\textwidth]{images/run-fastapi.png}
-        \caption{Run fastapi endpoint}
-      \end{figure}
-        \end{column}
-  \end{columns}
+  \begin{itemize}
+    \item \texttt{cd simple-service}
+    \item \texttt{uv run fastapi dev src/simple\_service/base.py}
+  \end{itemize}
+  \begin{figure}
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/run-fastapi.png}
+    \caption{Run fastapi endpoint}
+  \end{figure}
 \end{frame}
 \subsection{Python uv fastapi en Codespaces}
 \begin{frame}{\subsecname}
@@ -201,12 +202,14 @@
 
 \section{Archivos de configuracion}
 \begin{frame}{Devcontainer Spec}
-  El archivo de configuración permite describir cómo crear un contenedor y sus configuraciones de entorno, referencia en \href{https://containers.dev/implementors/json_reference/}{https://containers.dev/implementors/json\_reference/}
+  El archivo de configuración permite describir cómo crear un contenedor y sus configuraciones de entorno.
+  
+  Referencia en \href{https://containers.dev/implementors/json_reference/}{https://containers.dev/implementors/json\_reference/}
   \begin{block}{Archivo devcontainer.json}
     \begin{itemize}
+      \item “.devcontainer.json” dentro de la carpeta raíz del proyecto
       \item “devcontainer.json” dentro de la carpeta “.devcontainer”
-      \item “.devcontainer.json”
-      \item locaciones alternativas en sub carpetas de .devcontainer pueden ser definidas
+      \item se puede definir ubicaciones alternativas en subcarpetas de .devcontainer
     \end{itemize}
   \end{block}
 \end{frame}
@@ -229,7 +232,7 @@
     \begin{itemize}
       \item \textbf{common-utils:} Crea usuarios y configura la base del contenedor
       \item \textbf{uv:} Instala UV para manejar projectos python
-      \\subsection{}item \textbf{python:} Instala python en este caso con la version 3.12
+      \item \textbf{python:} Instala python en este caso con la version 3.12
     \end{itemize}
   \end{block}
 \end{frame}
@@ -269,12 +272,12 @@ Cada IDE o ambiente puede tener customizaciones especificas y depende de cada pr
 \begin{frame}{\subsecname}
   \begin{itemize}
     \small
-    \item \textbf{TypeScript React.js+Nest.js:} \href{https://github.com/prulloac/devcontainer-boilerplate-typescript-vite-react-nest}{https://github.com/prulloac/devcontainer-boilerplate-typescript-vite-react-nest}
-    \item \textbf{Python Flask:} \href{https://github.com/prulloac/devcontainer-boilerplate-python-poetry-flask}{https://github.com/prulloac/devcontainer-boilerplate-python-poetry-flask}
+    \item \textbf{TypeScript + React.js + Nest.js:} \href{https://github.com/prulloac/devcontainer-boilerplate-typescript-vite-react-nest}{https://github.com/prulloac/devcontainer-boilerplate-typescript-vite-react-nest}
+    \item \textbf{Python + poetry + Flask:} \href{https://github.com/prulloac/devcontainer-boilerplate-python-poetry-flask}{https://github.com/prulloac/devcontainer-boilerplate-python-poetry-flask}
     \item \textbf{Java SpringBoot + TestContainer:} \href{https://github.com/prulloac/devcontainer-boilerplate-java-maven-springboot}{https://github.com/prulloac/devcontainer-boilerplate-java-maven-springboot}
     \item \textbf{Latex:} \href{https://github.com/prulloac/devcontainer-boilerplate-latex-resume}{https://github.com/prulloac/devcontainer-boilerplate-latex-resume}
     \item \textbf{Jupyter Notebook:} \href{https://github.com/prulloac/devcontainer-boilerplate-jupyter-poetry-langchain}{https://github.com/prulloac/devcontainer-boilerplate-jupyter-poetry-langchain}
-    \item \textbf{Python+uv+FastAPI} \href{https://github.com/copernicus231/devcontainer-boilerplate-python-uv-fastapi}{https://github.com/copernicus231/devcontainer-boilerplate-python-uv-fastapi}
+    \item \textbf{Python + uv + FastAPI:} \href{https://github.com/copernicus231/devcontainer-boilerplate-python-uv-fastapi}{https://github.com/copernicus231/devcontainer-boilerplate-python-uv-fastapi}
     \normalsize
   \end{itemize}
 \end{frame}
@@ -285,12 +288,13 @@ Cada IDE o ambiente puede tener customizaciones especificas y depende de cada pr
     \caption{\href{https://github.com/codespaces/templates}{https://github.com/codespaces/templates}}
   \end{figure}
 \end{frame}
-\section{Conclusion}
-\begin{frame}{Conclusion}
+\section{Conclusiones}
+\begin{frame}{Conclusiones}
+  Los dev containers son una herramienta poderosa para el desarrollo de software, y permiten:
   \begin{itemize}
-    \item \textbf{c1:} c1
-    \item \textbf{c2:} c2
-    \item \textbf{c3:} c3
+    \item eliminar el clásico “funciona en mi máquina”.
+    \item facilitar el onboarding y la colaboración en proyectos.
+    \item integrarse con CI/CD y entornos remotos.
   \end{itemize}
 \end{frame}
 
